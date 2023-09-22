@@ -16,6 +16,7 @@ class User(AbstractUser):
 class Product(models.Model):
     owner = models.ForeignKey(to=User, on_delete=models.CASCADE)
     accesses = models.ManyToManyField(User)
+    lessons = models.ManyToManyField(Lesson)
 
 
 class VideoWatch(models.Model):
