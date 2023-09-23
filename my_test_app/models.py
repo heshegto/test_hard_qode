@@ -14,6 +14,7 @@ class User(AbstractUser):
 
 
 class Product(models.Model):
+    name = models.CharField(max_length=128)
     owner = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='owner')
     accesses = models.ManyToManyField(User, related_name='access')
     lessons = models.ManyToManyField(Lesson)
