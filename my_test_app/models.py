@@ -5,12 +5,12 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 class Lesson(models.Model):
     name = models.CharField(max_length=128, blank=False, null=False)
-    url_adress = models.URLField(blank=False, null=False)
+    url_address = models.URLField(blank=False, null=False)
     length_in_seconds = models.PositiveSmallIntegerField(default=0, blank=False, null=False)
 
 
 class User(AbstractUser):
-    video_watch = models.ManyToManyField(
+    video_watches = models.ManyToManyField(
         to='Lesson',
         through="VideoWatch",
         blank=True,

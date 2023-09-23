@@ -5,12 +5,13 @@ from my_test_app.models import User, Lesson, Product, VideoWatch
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
     list_display = ('username',)
+    fields = (('username', 'password'), 'email_address' 'user_permissions', 'accesses')
 
 
 @admin.register(Lesson)
 class LessonAdmin(admin.ModelAdmin):
-    list_display = ('name', 'url_adress', 'length_in_seconds',)
-    fields = ('name', 'url_adress', 'length_in_seconds',)
+    list_display = ('name', 'url_address', 'length_in_seconds',)
+    fields = ('name', 'url_address', 'length_in_seconds',)
 
 
 @admin.register(Product)
