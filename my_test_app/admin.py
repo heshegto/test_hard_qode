@@ -9,8 +9,8 @@ class UserAdmin(admin.ModelAdmin):
 
 @admin.register(Lesson)
 class LessonAdmin(admin.ModelAdmin):
-    list_display = ('name', 'url_adress', 'length',)
-    fields = ('name', 'url_adress', 'length',)
+    list_display = ('name', 'url_adress', 'length_in_seconds',)
+    fields = ('name', 'url_adress', 'length_in_seconds',)
 
 
 @admin.register(Product)

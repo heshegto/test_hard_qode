@@ -4,9 +4,9 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 class Lesson(models.Model):
-    name = models.CharField(max_length=128)
-    url_adress = models.URLField()
-    length = models.TimeField()
+    name = models.CharField(max_length=128, blank=False, null=False)
+    url_adress = models.URLField(unique=True, blank=False, null=False)
+    length_in_seconds = models.PositiveSmallIntegerField(default=0, blank=False, null=False)
 
 
 class User(AbstractUser):
