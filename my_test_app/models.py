@@ -3,18 +3,23 @@ from django.contrib.auth.models import AbstractUser
 from django.core.validators import MaxValueValidator, MinValueValidator
 
 
+# Задание 1.2
 class Lesson(models.Model):
     name = models.CharField(max_length=128, blank=False, null=False)
     url_address = models.URLField(blank=False, null=False)
+    # Длина видео урока в секундах
     length_in_seconds = models.PositiveSmallIntegerField(default=0, blank=False, null=False)
 
 
+# Моя модель пользователя
 class User(AbstractUser):
+    # Просмотры видео
     video_watches = models.ManyToManyField(
         to='Lesson',
         through="VideoWatch",
         blank=True,
     )
+    # Доступные уроки
     accesses = models.ManyToManyField(
         to='Product',
         related_name='access',
@@ -22,6 +27,7 @@ class User(AbstractUser):
     )
 
 
+# Задание 1.1
 class Product(models.Model):
     name = models.CharField(max_length=128)
     owner = models.ForeignKey(
@@ -37,6 +43,7 @@ class Product(models.Model):
     )
 
 
+# Задание 1.3
 class VideoWatch(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE, blank=True, null=True)
