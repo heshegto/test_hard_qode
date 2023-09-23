@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test HardQode</title>
+</head>
+<body>
+
+<!-- Head -->
+<nav>
+    <a href="#">Общая статистика</a> |
+    <a href="#">Войти</a> |
+    {# if loged_in #}
+    <a href="#">Мои продукты</a> |
+    <a href="#">Выйти</a>
+    {# endif #}
+</nav>
+
+<!-- Content -->
+{% block content %}
+{% endblock content %}
+
+<!-- Footer -->
+<nav id="footer">
+    <a href="http://github.com/heshegto" target="_blank">My git</a>
+    |
+    <a href="mailto:heshkin@gmail.com" target="_blank">My mail</a>
+</nav>
+</body>
+</html>
