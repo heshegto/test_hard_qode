@@ -11,12 +11,12 @@ class Lesson(models.Model):
 
 class User(AbstractUser):
     video_watch = models.ManyToManyField(to=Lesson, through="VideoWatch")
+    accesses = models.ManyToManyField('Product', related_name='access', blank=True)
 
 
 class Product(models.Model):
     name = models.CharField(max_length=128)
     owner = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='owner')
-    accesses = models.ManyToManyField(User, related_name='access')
     lessons = models.ManyToManyField(Lesson)
 
 

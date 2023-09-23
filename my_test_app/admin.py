@@ -6,6 +6,7 @@ from my_test_app.models import User, Lesson, Product, VideoWatch
 class UserAdmin(admin.ModelAdmin):
     list_display = ('username',)
 
+
 @admin.register(Lesson)
 class LessonAdmin(admin.ModelAdmin):
     list_display = ('name', 'url_adress', 'length',)
@@ -15,7 +16,7 @@ class LessonAdmin(admin.ModelAdmin):
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('name', 'owner',)
-    fields = ('name', 'owner', 'accesses', 'lessons')
+    fields = ('name', 'owner', 'lessons')
 
 
 @admin.register(VideoWatch)
