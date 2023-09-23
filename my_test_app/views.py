@@ -2,5 +2,5 @@ from django.shortcuts import render
 from django.views.generic.base import TemplateView
 
 
-class BaseView(TemplateView):
-    template_name = 'base.html'
+class MainView(TemplateView):
+    template_name = 'main.html'
