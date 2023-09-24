@@ -19,12 +19,6 @@ class User(AbstractUser):
         through="VideoWatch",
         blank=True,
     )
-    # Доступные уроки
-    accesses = models.ManyToManyField(
-        to='Product',
-        related_name='access',
-        blank=True,
-    )
 
 
 # Задание 1.1
@@ -41,6 +35,12 @@ class Product(models.Model):
         to='Lesson',
         blank=True,
     )
+
+
+# Доступы для пользователей из задания 1.1
+class Accesses(models.Model):
+    user = models.OneToOneField(to=User, on_delete=models.CASCADE)
+    accesses = models.ManyToManyField(to=Product, blank=True)
 
 
 # Задание 1.3
