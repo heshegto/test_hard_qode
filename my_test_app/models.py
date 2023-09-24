@@ -55,3 +55,10 @@ class VideoWatch(models.Model):
         ]
     )
     is_watched = models.BooleanField(default=False)
+
+    def save(self, *args, **kwargs):
+        if self.time_stop >= 0.8:
+            self.is_watched = True
+        else:
+            self.is_watched = False
+        super().save(*args, **kwargs)
