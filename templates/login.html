@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+        <h3>Авторизация</h3>
+        <form action="{% url 'my_test_app:login' %}" method="post">
+            {% csrf_token %}
+            <div>
+                <label for="{{ form.username.id_for_label }}">
+                    Имя пользователя
+                </label>
+                {{ form.username }}
+            </div>
+            <div>
+                <label for="{{ form.password.id_for_label }}">
+                    Пароль
+                </label>
+                {{ form.password }}
+            </div>
+            <div>
+                <input type="submit" value="Авторизоваться">
+            </div>
+        </form>
+{% endblock %}
