@@ -12,7 +12,7 @@
     <a href="{% url 'my_test_app:statistics' %}">Общая статистика</a> |
     {% if user.is_authenticated %}
         <a>{{ user.username }}</a> |
-        <a href="{% url 'my_test_app:user_product' %}">Мои продукты</a> |
+        <a href="{% url 'api:user_list' %}">Мои продукты</a> |
         {% if user.is_superuser or user.is_staff %}
             <a href="{% url 'admin:index' %}">Админ-панель</a> |
         {% endif %}

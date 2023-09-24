@@ -1,11 +1,11 @@
 from django.contrib import admin
-from my_test_app.models import User, Lesson, Product, VideoWatch
+from my_test_app.models import User, Lesson, Product, VideoWatch, Accesses
 
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
     list_display = ('username',)
-    fields = (('username', 'password'), 'user_permissions', 'accesses')
+    fields = (('username', 'password'), 'user_permissions')
 
 
 @admin.register(Lesson)
@@ -24,3 +24,8 @@ class ProductAdmin(admin.ModelAdmin):
 class VideoWatchAdmin(admin.ModelAdmin):
     list_display = ('user', 'lesson', 'time_stop', 'is_watched')
     fields = ('user', 'lesson', 'time_stop', 'is_watched')
+
+@admin.register(Accesses)
+class AccessesAdmin(admin.ModelAdmin):
+    list_display = ('user',)
+    fields = ('user', 'accesses')
