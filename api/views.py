@@ -1,6 +1,6 @@
 from rest_framework.generics import ListAPIView
 from my_test_app.models import User, Accesses, Product
-from api.serializers import UserSerializer, AccessesSerializer, ProductSerializer
+from api.serializers import UserSerializer, ProductSerializer, ProductStatisticsSerializer
 from rest_framework.permissions import IsAuthenticated
 
 
@@ -25,3 +25,10 @@ class ProductListAPIView(ListAPIView):
         else:
             return None
 
+
+# Задание 2.3
+class StatisticsListAPIView(ListAPIView):
+    serializer_class = ProductStatisticsSerializer
+
+    def get_queryset(self):
+        return Product.objects.all()

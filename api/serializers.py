@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from my_test_app.models import User, Product, Lesson, Accesses, VideoWatch
+from django.db.models import Count
 
 
 class VideoWatchSerializer(serializers.ModelSerializer):
@@ -49,3 +50,17 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ('id', 'username', 'accesses')
 
+
+class ProductStatisticsSerializer(serializers.ModelSerializer):
+    amount_of_watched_videos = serializers.SerializerMethodField('_amount_of_watched_videos')
+
+    class Meta:
+        model = Product
+        fields = ('id', 'name', 'owner', 'amount_of_watched_videos')
+
+
+    def _amount_of_watched_videos(self, obj):
+        lessons = obj.lessons.all()
+        # print(lesson)
+        # lesson__in = obj.lessons
+        return VideoWatch.objects.filter(is_watched=True, lesson__in=lessons).aggregate(Count('lesson'))
