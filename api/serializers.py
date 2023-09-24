@@ -51,16 +51,24 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('id', 'username', 'accesses')
 
 
+# Нужно только для задания 2.3
 class ProductStatisticsSerializer(serializers.ModelSerializer):
     amount_of_watched_videos = serializers.SerializerMethodField('_amount_of_watched_videos')
+    sum_of_spent_time = serializers.SerializerMethodField('_sum_of_spent_time')
 
     class Meta:
         model = Product
-        fields = ('id', 'name', 'owner', 'amount_of_watched_videos')
+        fields = ('id', 'name', 'owner', 'amount_of_watched_videos', 'sum_of_spent_time')
 
 
     def _amount_of_watched_videos(self, obj):
         lessons = obj.lessons.all()
-        # print(lesson)
-        # lesson__in = obj.lessons
-        return VideoWatch.objects.filter(is_watched=True, lesson__in=lessons).aggregate(Count('lesson'))
+        return VideoWatch.objects.filter(is_watched=True, lesson__in=lessons).aggregate(Count('lesson'))['lesson__count']
+
+    def _sum_of_spent_time(self, obj):
+        lessons_id = obj.lessons.all()
+        video_watches = VideoWatch.objects.filter(lesson__in=lessons_id)
+        result = 0
+        for vw in video_watches:
+            result += vw.time_stop * vw.lesson.length_in_seconds
+        return result
