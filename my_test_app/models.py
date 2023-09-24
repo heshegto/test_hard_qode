@@ -61,4 +61,5 @@ class VideoWatch(models.Model):
             self.is_watched = True
         else:
             self.is_watched = False
+
         super().save(*args, **kwargs)
