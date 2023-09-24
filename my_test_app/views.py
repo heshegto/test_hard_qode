@@ -14,9 +14,5 @@ class UserLoginView(LoginView):
     form_class = UserLoginForm
 
 
-class UserProductsView(TemplateView):
-    template_name = 'user_products.html'
-
-
 class StatisticsView(TemplateView):
     template_name = 'statistics.html'

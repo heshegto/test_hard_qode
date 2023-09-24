@@ -1,11 +1,29 @@
 from rest_framework import serializers
-from my_test_app.models import User, Product, Lesson, Accesses
+from my_test_app.models import User, Product, Lesson, Accesses, VideoWatch
+
+
+class VideoWatchSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = VideoWatch
+        fields = ('time_stop', 'is_watched', 'lesson')
 
 
 class LessonSerializer(serializers.ModelSerializer):
+    video_watch_data = serializers.SerializerMethodField()
+
     class Meta:
         model = Lesson
-        fields = ('id', 'name', 'url_address', 'length_in_seconds')
+        fields = ('id', 'name', 'url_address', 'length_in_seconds', 'video_watch_data')
+
+    def get_video_watch_data(self, obj):
+        selected_options = VideoWatch.objects.filter(
+            lesson=obj.pk,
+            user=self.context['request'].user
+        )
+        return VideoWatchSerializer(selected_options, many=True).data
+
+
+
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -18,6 +36,7 @@ class ProductSerializer(serializers.ModelSerializer):
 
 class AccessesSerializer(serializers.ModelSerializer):
     accesses = ProductSerializer(many=True, read_only=True)
+
     class Meta:
         model = Accesses
         fields = ('accesses',)
@@ -29,3 +48,4 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'username', 'accesses')
+
