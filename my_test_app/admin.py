@@ -5,7 +5,7 @@ from my_test_app.models import User, Lesson, Product, VideoWatch
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
     list_display = ('username',)
-    fields = (('username', 'password'), 'email_address' 'user_permissions', 'accesses')
+    fields = (('username', 'password'), 'user_permissions', 'accesses')
 
 
 @admin.register(Lesson)

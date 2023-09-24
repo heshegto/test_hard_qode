@@ -10,11 +10,16 @@
 <nav>
     <a href="{% url 'my_test_app:main' %}">Главная</a> |
     <a href="#">Общая статистика</a> |
-    <a href="#">Войти</a> |
-    {# if loged_in #}
-    <a href="#">Мои продукты</a> |
-    <a href="#">Выйти</a>
-    {# endif #}
+    {% if user.is_authenticated %}
+        <a>{{ user.username }}</a> |
+        <a href="#">Мои продукты</a> |
+        {% if user.is_superuser or user.is_staff %}
+            <a href="{% url 'admin:index' %}">Админ-панель</a> |
+        {% endif %}
+        <a href="{%  url 'my_test_app:logout' %}">Выйти</a>
+    {% else %}
+        <a href="{% url 'my_test_app:login' %}">Войти</a> |
+    {% endif %}
 </nav>
 
 <!-- Content -->
