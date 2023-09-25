@@ -32,22 +32,6 @@ class ProductSerializer(serializers.ModelSerializer):
         fields = ('id', 'name', 'owner', 'lessons')
 
 
-class AccessesSerializer(serializers.ModelSerializer):
-    accesses = ProductSerializer(many=True, read_only=True)
-
-    class Meta:
-        model = Accesses
-        fields = ('accesses',)
-
-
-class UserSerializer(serializers.ModelSerializer):
-    accesses = AccessesSerializer()
-
-    class Meta:
-        model = User
-        fields = ('id', 'username', 'accesses')
-
-
 # Нужно только для задания 2.3
 class ProductStatisticsSerializer(serializers.ModelSerializer):
     amount_of_watched_videos = serializers.SerializerMethodField('_amount_of_watched_videos')
